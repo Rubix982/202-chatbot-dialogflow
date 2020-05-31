@@ -5,7 +5,7 @@ const serviceAccount = require('./service-account.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://fireship-lessons.firebaseio.com"
+  databaseURL: "https://fireship---dialogflow-chatbot.firebaseio.com"
 });
 
 const { SessionsClient } = require('dialogflow');
@@ -17,7 +17,7 @@ exports.dialogflowGateway = functions.https.onRequest((request, response) => {
 
 
     const sessionClient = new SessionsClient({ credentials: serviceAccount });
-    const session = sessionClient.sessionPath('fireship-lessons', sessionId);
+    const session = sessionClient.sessionPath('fireship---dialogflow-chatbot', sessionId);
 
 
     const responses = await sessionClient.detectIntent({ session, queryInput});
@@ -37,11 +37,11 @@ exports.dialogflowWebhook = functions.https.onRequest(async (request, response) 
     console.log(JSON.stringify(request.body));
 
     const result = request.body.queryResult;
-   
+
     function welcome(agent) {
       agent.add(`Welcome to my agent!`);
     }
-   
+
     function fallback(agent) {
       agent.add(`Sorry, can you try again?`);
     }
